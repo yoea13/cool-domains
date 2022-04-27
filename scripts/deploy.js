@@ -1,4 +1,4 @@
-// Se ejecuta npx hardhat run scripts/run.js
+// Se ejecuta npx hardhat run scripts/deploy.js --network mumbai
 
 const main = async () => {
   const domainContractFactory = await hre.ethers.getContractFactory('Domains');
@@ -10,7 +10,7 @@ const main = async () => {
   // CHANGE THIS DOMAIN TO SOMETHING ELSE! I don't want to see OpenSea full of bananas lol
   let txn = await domainContract.register("yoea",  {value: hre.ethers.utils.parseEther('0.1')});
   await txn.wait();
-  console.log("Minted domain banana.ninja");
+  console.log("Minted domain yoea.biker");
 
   txn = await domainContract.setRecord("yoea", "I am a biker");
   await txn.wait();
