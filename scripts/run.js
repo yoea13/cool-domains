@@ -1,23 +1,21 @@
+// Se ejecuta npx hardhat run scripts/run.js
+
 const main = async () => {
-  const [owner, randomPerson] = await hre.ethers.getSigners();
   const domainContractFactory = await hre.ethers.getContractFactory('Domains');
-  const domainContract = await domainContractFactory.deploy();
+  const domainContract = await domainContractFactory.deploy("biker");
   await domainContract.deployed();
+
   console.log("Contract deployed to:", domainContract.address);
-  console.log("Contract deployed by:", owner.address);
-  
-  let txn = await domainContract.register("doom");
+
+  // We're passing in a second variable - value. This is the moneyyyyyyyyyy
+  let txn = await domainContract.register("yoea",  {value: hre.ethers.utils.parseEther('0.1')});
   await txn.wait();
 
-  const domainAddress = await domainContract.getAddress("doom");
-  console.log("Propietario de dominio DOOM", domainAddress);
+  const address = await domainContract.getAddress("yoea");
+  console.log("Owner of domain yoea:", address);
 
-  //prueba de escribir un no propietario
-  // txn = await domainContract.connect(randomPerson).setRecord("doom", "Ahora es mi dominio!");
-  // await txn.wait();
-
-  // const domainOwner = await domainContract.getAddress("doom");
-  // console.log("Owner of domain:", domainOwner);
+  const balance = await hre.ethers.provider.getBalance(domainContract.address);
+  console.log("Contract balance:", hre.ethers.utils.formatEther(balance));
 }
 
 const runMain = async () => {
