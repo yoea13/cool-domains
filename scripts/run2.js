@@ -1,4 +1,4 @@
-// Se ejecuta npx hardhat run scripts/run.js
+// Se ejecuta npx hardhat run scripts/run2.js
 
 const main = async () => {
   const [owner, superCoder] = await hre.ethers.getSigners();
