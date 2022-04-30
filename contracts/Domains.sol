@@ -49,11 +49,12 @@ contract Domains is ERC721URIStorage {
   }
 
   function valid(string calldata name) public pure returns(bool) {
-    return StringUtils.strlen(name) >= 2 && StringUtils.strlen(name) <= 10;
+    return StringUtils.strlen(name) >= 3 && StringUtils.strlen(name) <= 10;
   }
 
   function getAllNames() public view returns (string[] memory) {
     console.log("Getting all names from contract");
+    
     string[] memory allNames = new string[](_tokenIds.current());
     for (uint i = 0; i < _tokenIds.current(); i++) {
       allNames[i] = names[i];
@@ -98,7 +99,7 @@ contract Domains is ERC721URIStorage {
       abi.encodePacked(
         '{"name": "',
         _name,
-        '", "description": "A domain on the Ninja name service", "image": "data:image/svg+xml;base64,',
+        '", "description": "A Bike name service", "image": "data:image/svg+xml;base64,',
         Base64.encode(bytes(finalSvg)),
         '","length":"',
         strLen,
@@ -115,6 +116,7 @@ contract Domains is ERC721URIStorage {
     _safeMint(msg.sender, newRecordId);
     _setTokenURI(newRecordId, finalTokenUri);
     domains[name] = msg.sender;
+    names[newRecordId] = name;
 
     _tokenIds.increment();
   }
