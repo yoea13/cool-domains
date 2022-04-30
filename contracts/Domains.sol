@@ -99,7 +99,7 @@ contract Domains is ERC721URIStorage {
       abi.encodePacked(
         '{"name": "',
         _name,
-        '", "description": "A Bike name service", "image": "data:image/svg+xml;base64,',
+        '", "description": "A Biker Name Service", "image": "data:image/svg+xml;base64,',
         Base64.encode(bytes(finalSvg)),
         '","length":"',
         strLen,
